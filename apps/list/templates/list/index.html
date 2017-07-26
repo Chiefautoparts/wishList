@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Untitled</title>
+    </head>
+    <body>
+      <h1>Welcome {{user.name}}</h1>
+      <p><a href="{% url 'login:logout' %}">logout</a></p>
+      {% if messages %}
+		<ul>
+			{% for message in messages %}
+			<li>{{ message }}</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+      <h3>Your Wish List:</h3>
+    	<table class="bordered">
+    		<thead>
+    			<tr>
+    				<th name="item">Item</th>
+    				<th name="user">Added By</th>
+    				<th name="price">Date Added</th>
+    				<th name="action">Action</th>
+    			</tr>
+    		</thead>
+    	   <p>{{items.name}}</p>
+    		<tbody>
+    			
+    			{% for items in user.items %}
+                <tr>
+    				 
+    				<td>{{item.name}}</td>
+    				<td>{{item.user}}</td>
+    				<td>{{item.created}}</td>
+    				<td><a href="{% url 'list:delete' %}">Delete from Database</a><a href="">Remove from my List</a></td>
+    				
+                    </tr>
+    			{% endfor %}
+    			
+    			</tbody>
+    	</table>
+    	<br>
+    	<h3>Other User's Wish List:</h3>
+    	<table class="bordered">
+    		<thead>
+    			<tr>
+    				<th name="item">Item</th>
+    				<th name="user">Added By</th>
+    				<th name="price">Date Added</th>
+    				<th name="action">Action</th>
+    			</tr>
+    		</thead>
+    	
+    		<tbody>
+    			{% for items in user.item %}
+                <tr>
+
+    				{% if item.owner.id == user.id %}
+    				<td>{{items.name}}</td>
+    				<td>{{items.owner}}</td>
+    				<td>{{items.created}}</td>
+    				<td><a href="{% url 'list:addToList' %}">Add to my WistLost</a></td>
+    				{% endif %}
+                    </tr>
+    			{% endfor %}
+    			
+    			<tr>
+    				
+    			</tr>
+    		</tbody>
+    	</table>
+    	<form action="{% url 'list:makeItem' %}" method='post'>
+        {% csrf_token %}
+    		<input type="submit" name="submit" value="Create Item">
+        
+    	</form>
+    </body>
+</html>

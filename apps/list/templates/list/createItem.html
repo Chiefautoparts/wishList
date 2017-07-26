@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Create Item</title>
+    </head>
+    <body>
+    <h1>Create a New Wish List Item</h1>
+    {% if messages %}
+    <ul>
+    	{%  for message in messages %}
+    	<li>{{ message }}</li>
+    	{% endfor %}
+    </ul>
+    {% endif %}
+      <form action="{% url 'list:createItem' %}" method="post">
+      {% csrf_token %}
+       	Item/Product: <input type="text" name="name" placeholder="Enter Item Name" />
+       	<input type="hidden" name="owner" value="{{request.session.id}}"/>
+       	<input type="submit" name="submit" value="Add"/>
+       </form> 
+    </body>
+</html>

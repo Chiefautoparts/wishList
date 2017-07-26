@@ -1,0 +1,43 @@
+body {
+	background-color: #D3D3D3;
+	color: #000000;
+}
+
+#title {
+	text-decoration: underline;
+	font-size: 8em;
+	text-shadow: -3px -3px 2px #404040;
+	text-align: center;
+	
+
+h2 #subTitle {
+	text-decoration: underline;
+	font-size: 3em;
+	text-shadow: -2px -2px 3px #404040;
+	text-align: center;
+}
+
+#error {
+	color: #00FF1C;
+	animation-duration: 5s;
+	animation-name: slidein;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+}
+
+@key-frames slidein {
+	from {
+		margin-left: 100%;
+		width: 300%;
+	}
+
+	to {
+		margin-left: 0%;
+		width: 100%;
+	}
+	75% {
+		font-size: 500%;
+		margin-left: 25%;
+		width: 150%;
+	}
+}
